@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 36 14% 96%;
+    --foreground: 24 14% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 24 14% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 24 14% 10%;
+    --primary: 12 68% 42%;
+    --primary-foreground: 36 30% 97%;
+    --secondary: 36 12% 92%;
+    --secondary-foreground: 24 14% 14%;
+    --muted: 36 10% 93%;
+    --muted-foreground: 26 6% 38%;
+    --accent: 14 55% 93%;
+    --accent-foreground: 12 60% 28%;
+    --destructive: 0 70% 40%;
+    --destructive-foreground: 36 30% 97%;
+    --border: 32 9% 85%;
+    --input: 32 9% 80%;
+    --ring: 12 68% 42%;
+    --radius: 0rem;
+    --sidebar-background: 36 18% 97%;
+    --sidebar-foreground: 24 10% 26%;
+    --sidebar-primary: 12 68% 42%;
+    --sidebar-primary-foreground: 36 30% 97%;
+    --sidebar-accent: 14 50% 93%;
+    --sidebar-accent-foreground: 12 60% 28%;
+    --sidebar-border: 32 10% 87%;
+    --sidebar-ring: 12 68% 42%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+      "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  /* 数字与金额使用等宽字体，保证表格列对齐 */
+  .tnum {
+    font-family: ui-monospace, "SF Mono", "Cascadia Mono", Consolas,
+      "Roboto Mono", "Courier New", monospace;
+    font-variant-numeric: tabular-nums;
+  }
+  ::selection {
+    background: hsl(var(--primary) / 0.85);
+    color: hsl(var(--primary-foreground));
+  }
+}
+
+@layer components {
+  /* 描边按钮：悬停反色（参考档案馆式即时反色交互） */
+  .btn-ghost-invert {
+    @apply inline-flex items-center gap-1.5 border border-foreground/70 bg-transparent px-3 text-sm
+      text-foreground transition-colors duration-150 hover:bg-foreground hover:text-background
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+      disabled:pointer-events-none disabled:opacity-40;
+    min-height: 32px;
+  }
+  .btn-solid {
+    @apply inline-flex items-center gap-1.5 border border-primary bg-primary px-3 text-sm
+      text-primary-foreground transition-colors duration-150 hover:bg-primary/85
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+      disabled:pointer-events-none disabled:opacity-40;
+    min-height: 32px;
+  }
+  .icon-btn {
+    @apply inline-flex h-8 w-8 items-center justify-center border border-transparent text-muted-foreground
+      transition-colors duration-150 hover:border-border hover:bg-secondary hover:text-foreground
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-40;
+  }
+}
+
+/* 打印：只保留当前清单表格 */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+  .print-full {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-left: none !important;
+  }
+}
